@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey">
+
+    <TextView
+        android:id="@+id/btn_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="550dp"
+        android:background="@drawable/btn_auth"
+        android:contentDescription="@null"
+        android:gravity="center"
+        android:text="@string/btn_auth_text"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:backgroundTint="@color/dark_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fname"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
+        android:background="@drawable/back_with_border"
+        android:autofillHints="name"
+        android:hint="@string/fname"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="350dp"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/sname"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
+        android:background="@drawable/back_with_border"
+        android:autofillHints="name"
+        android:hint="@string/sname"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="250dp"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
+        android:background="@drawable/back_with_border"
+        android:autofillHints="name"
+        android:hint="@string/city_name"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="160dp"
+        android:inputType="textPersonName"
+        />
+
+    <TextView
+        android:layout_width="285dp"
+        android:layout_height="35dp"
+        android:background="@drawable/oval_btn_style"
+        android:contentDescription="@null"
+        android:text="@string/btn_continue"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="650dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

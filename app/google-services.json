@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "634849295955",
+    "project_id": "kopatest-f6e8d",
+    "storage_bucket": "kopatest-f6e8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634849295955:android:7475578950ce7afc79d0a6",
+        "android_client_info": {
+          "package_name": "com.milanlalkovich.kopatest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634849295955-8h8u6efduaoa03udaug5b4cteqvfh09s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZQs5uuc3RyAxwFVYqeGNx8VjCx98khk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634849295955-8h8u6efduaoa03udaug5b4cteqvfh09s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

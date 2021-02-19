@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="120dp"
+        android:contentDescription="@null"
+        android:src="@drawable/kopa_logo" />
+
+    <TextView
+        android:id="@+id/pic_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/btn_auth"
+        android:contentDescription="@null"
+        android:gravity="center"
+        android:text="@string/btn_auth_text"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:backgroundTint="@color/dark_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_number"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
+        android:background="@drawable/back_with_border"
+        android:autofillHints="number"
+        android:hint="@string/number_edit_text"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="530dp"
+        android:inputType="phone"
+         />
+
+    <EditText
+        android:id="@+id/edit_code"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
+        android:background="@drawable/back_with_border"
+        android:autofillHints="number"
+        android:hint="@string/number_edit_text"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="530dp"
+        android:inputType="number"
+        />
+
+
+    <TextView
+        android:id="@+id/btn_number_verify"
+        android:layout_width="285dp"
+        android:layout_height="35dp"
+        android:background="@drawable/oval_btn_style"
+        android:contentDescription="@null"
+        android:text="@string/btn_verify"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="650dp"/>
+
+    <TextView
+        android:id="@+id/btn_code_verify"
+        android:layout_width="285dp"
+        android:layout_height="35dp"
+        android:background="@drawable/oval_btn_style"
+        android:contentDescription="@null"
+        android:text="@string/btn_verify"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="650dp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

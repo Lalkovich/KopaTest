@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">KopaTest</string>
+    <string name="btn_auth_text">Вхід</string>
+    <string name="btn_verify">Верифікувати</string>
+    <string name="btn_next">Далі</string>
+    <string name="btn_continue">Далі</string>
+    <string name="number_edit_text">number</string>
+    <string name="fname">Ім\'я</string>
+    <string name="sname">Прізвище</string>
+    <string name="city_name">Місто</string>
+    <string name="password_edit_text">password</string>
+    <string name ="profile_hint_name">Angela Mayer</string>
+    <string name="exit_profile_btn">Вийти</string>
+    <string name="contact_number">Контактний номер</string>
+    <string name="city">Місто</string>
+    <string name="user_number">+38 063 282 90 70</string>
+    <string name="user_city">Вінниця</string>
+    <string name="facebook_app_id">1277174422681967</string>
+    <string name="fb_login_protocol_scheme">fb1277174422681967</string>
+
+</resources>
