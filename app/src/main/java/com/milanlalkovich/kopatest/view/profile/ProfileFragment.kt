@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.milanlalkovich.kopatest.R
@@ -38,8 +39,9 @@ class ProfileFragment : Fragment() {
 
         val user = auth.currentUser
         binding.profileName.text = user?.displayName
+        binding.userNumber.text = user?.phoneNumber
 
-        Glide.with(this).load(user?.photoUrl).into(binding.profileFace)
+        Glide.with(this).load(user?.photoUrl).transform(CircleCrop()).into(binding.profileFace)
 
         binding.profileExitButton.setOnClickListener {
             auth.signOut()

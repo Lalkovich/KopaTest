@@ -54,7 +54,7 @@ class PhoneAuthFragment : Fragment() {
         }
 
         binding.btnCodeVerify.setOnClickListener{
-            verifyCode(binding.btnCodeVerify.text.toString())
+            verifyCode(binding.editCode.text.toString())
 
             findNavController().navigate(R.id.action_phoneAuthFragment_to_profileFragment)
 

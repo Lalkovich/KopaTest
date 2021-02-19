@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.facebook.*
-import com.facebook.FacebookSdk.getApplicationContext
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -33,11 +32,13 @@ class AuthFragment : Fragment() {
 
     companion object {
         private const val RC_SIGN_IN = 120
+        private const val FC_SIGN_IN = 66
     }
 
     private lateinit var binding: FragmentAuthBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var googleSignInClient:GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,16 +52,16 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.phoneAuth.setOnClickListener{
+        binding.phoneAuth.setOnClickListener {
             findNavController().navigate(R.id.action_authFragment_to_phoneAuthFragment)
         }
 
-
         auth = FirebaseAuth.getInstance()
 
-        val callbackManager = CallbackManager.Factory.create()
         //Facebook Auth
+
         binding.loginButton.setReadPermissions("email", "public_profile")
+        binding.loginButton.fragment = this;
 
         binding.loginButton.registerCallback(callbackManager, object :
             FacebookCallback<LoginResult> {
@@ -73,7 +74,7 @@ class AuthFragment : Fragment() {
             }
 
             override fun onError(error: FacebookException) {
-
+                Log.d(TAG, "Facebook:OnError ", error)
             }
         })
 
@@ -84,7 +85,7 @@ class AuthFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(),gso)
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         binding.googleAuth.setOnClickListener {
             signIn()
@@ -98,13 +99,14 @@ class AuthFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val exception = task.exception
-            if(task.isSuccessful){
+            if (task.isSuccessful) {
                 try {
                     // Google Sign In was successful, authenticate with Firebase
                     val account = task.getResult(ApiException::class.java)!!
@@ -115,8 +117,8 @@ class AuthFragment : Fragment() {
                     Log.w(TAG, "Google sign in failed", e)
                     // ...
                 }
-            }else{
-                 Log.w(TAG,exception.toString())
+            } else {
+                Log.w(TAG, exception.toString())
             }
 
         }
@@ -139,7 +141,7 @@ class AuthFragment : Fragment() {
             }
     }
 
-//Facebook code
+    //Facebook code
     private fun handleFacebookAccessToken(token: AccessToken) {
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential)
@@ -169,7 +171,6 @@ class AuthFragment : Fragment() {
         }
 
     }
-
 
 
 }
