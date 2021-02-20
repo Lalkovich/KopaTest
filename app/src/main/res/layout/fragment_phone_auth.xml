@@ -53,7 +53,7 @@
         android:layout_height="34dp"
         android:background="@drawable/back_with_border"
         android:autofillHints="number"
-        android:hint="@string/number_edit_text"
+        android:hint="@string/code_edit_text"
         android:gravity="center"
         android:textColorHint="@color/white"
         android:textColor="@color/white"

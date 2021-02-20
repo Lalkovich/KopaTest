@@ -5,6 +5,7 @@
     <string name="btn_next">Далі</string>
     <string name="btn_continue">Далі</string>
     <string name="number_edit_text">number</string>
+    <string name="code_edit_text">code</string>
     <string name="fname">Ім\'я</string>
     <string name="sname">Прізвище</string>
     <string name="city_name">Місто</string>

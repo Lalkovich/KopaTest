@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.facebook.*
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,7 +36,6 @@ class AuthFragment : Fragment() {
 
     companion object {
         private const val RC_SIGN_IN = 120
-        private const val FC_SIGN_IN = 66
     }
 
     private lateinit var binding: FragmentAuthBinding
@@ -60,23 +63,27 @@ class AuthFragment : Fragment() {
 
         //Facebook Auth
 
-        binding.loginButton.setReadPermissions("email", "public_profile")
-        binding.loginButton.fragment = this;
+        binding.facebookAuth.setOnClickListener {
+            LoginManager.getInstance().logInWithReadPermissions(
+                this,
+                listOf("email", "public_profile")
+            )
+            LoginManager.getInstance().registerCallback(callbackManager, object :
+                FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    handleFacebookAccessToken(loginResult.accessToken)
+                }
 
-        binding.loginButton.registerCallback(callbackManager, object :
-            FacebookCallback<LoginResult> {
-            override fun onSuccess(loginResult: LoginResult) {
-                handleFacebookAccessToken(loginResult.accessToken)
-            }
+                override fun onCancel() {
 
-            override fun onCancel() {
+                }
 
-            }
+                override fun onError(error: FacebookException) {
+                    Log.d(TAG, "Facebook:OnError ", error)
+                }
+            })
+        }
 
-            override fun onError(error: FacebookException) {
-                Log.d(TAG, "Facebook:OnError ", error)
-            }
-        })
 
         //Google Auth Code
 
