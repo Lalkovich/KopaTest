@@ -1,4 +1,4 @@
-package com.milanlalkovich.kopatest.view.boots
+package com.milanlalkovich.kopatest.domain.model.response
 
 import com.google.gson.annotations.SerializedName
 

@@ -138,7 +138,7 @@ class AuthFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    findNavController().navigate(R.id.action_auth_complete)
+                    findNavController().navigate(R.id.action_authFragment_to_dataCompletionFragment)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -172,7 +172,7 @@ class AuthFragment : Fragment() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            findNavController().navigate(R.id.action_auth_complete)
+            findNavController().navigate(R.id.action_authFragment_to_dataCompletionFragment)
         } else {
             Toast.makeText(context, "Please sign in to continue", Toast.LENGTH_SHORT).show();
         }
