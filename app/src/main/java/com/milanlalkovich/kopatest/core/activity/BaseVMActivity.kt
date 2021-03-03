@@ -27,7 +27,7 @@ abstract class BaseVMActivity<VM : BaseViewModel, B : ViewDataBinding> : BaseBin
         super.onCreate(savedInstanceState)
 
         viewModel = getViewModel(clazz = viewModelClass)
-        binding.setVariable(BR.viewModel, viewModel)
+        //binding.setVariable(BR.viewModel, viewModel)
 
         viewModel.showMessage.eventObserve(this) {
             showMessage(it)

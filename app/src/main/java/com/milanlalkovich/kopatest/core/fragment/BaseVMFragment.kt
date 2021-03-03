@@ -19,7 +19,7 @@ abstract class BaseVMFragment<VM : BaseViewModel, B : ViewDataBinding> : BaseBin
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.setVariable(BR.viewModel, viewModel)
+        //binding.setVariable(BR.viewModel, viewModel)
 
         viewModel.showMessage.eventObserve(viewLifecycleOwner) {
             showMessage(it)

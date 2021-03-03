@@ -4,11 +4,8 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -22,35 +19,33 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.milanlalkovich.kopatest.R
+import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
+import com.milanlalkovich.kopatest.core.fragment.BaseVMFragment
 import com.milanlalkovich.kopatest.databinding.FragmentAuthBinding
+import kotlin.reflect.KClass
 
 /**
  *  Created by Android Studio on 30.01.2021 16:20
  *  Developer: Dima Iakubenko
  */
 
-class AuthFragment : Fragment() {
+class AuthFragment : BaseVMFragment<AuthViewModel, FragmentAuthBinding>() {
 
     companion object {
         private const val RC_SIGN_IN = 120
     }
 
-    private lateinit var binding: FragmentAuthBinding
+    override val viewModelClass: KClass<AuthViewModel>
+        get() = AuthViewModel::class
+    override val layoutId: Int
+        get() = R.layout.fragment_auth
+
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val callbackManager = CallbackManager.Factory.create()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAuthBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +53,15 @@ class AuthFragment : Fragment() {
         binding.phoneAuth.setOnClickListener {
             findNavController().navigate(R.id.action_authFragment_to_phoneAuthFragment)
         }
+
+        viewModel.isExist.nonNullObserve(viewLifecycleOwner) {
+            if(it){
+                findNavController().navigate(R.id.action_auth_complete)
+            }else{
+               findNavController().navigate(R.id.action_authFragment_to_dataCompletionFragment)
+            }
+        }
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -138,7 +142,7 @@ class AuthFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    findNavController().navigate(R.id.action_authFragment_to_dataCompletionFragment)
+                    viewModel.isUserExist()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -155,28 +159,19 @@ class AuthFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    updateUI(user)
+                    viewModel.isUserExist()
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
                         context, "Authentication failed.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    updateUI(null)
+
                 }
 
                 // ...
             }
-    }
-
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            findNavController().navigate(R.id.action_authFragment_to_dataCompletionFragment)
-        } else {
-            Toast.makeText(context, "Please sign in to continue", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
 

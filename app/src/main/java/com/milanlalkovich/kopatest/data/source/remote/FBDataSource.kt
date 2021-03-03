@@ -1,6 +1,7 @@
 package com.milanlalkovich.kopatest.data.source.remote
 
 import com.milanlalkovich.kopatest.domain.model.response.UserModel
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -9,6 +10,7 @@ import io.reactivex.Single
  */
 
 interface FBDataSource {
-
-    fun setUsers(newUser:UserModel): Single<List<UserModel>>
+    fun createUsers(newUser: UserModel): Completable
+    fun getUserData(): Single<UserModel>
+    fun isUserExist(): Single<Boolean>
 }
