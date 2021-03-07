@@ -1,7 +1,9 @@
 package com.milanlalkovich.kopatest.di
 
 import com.milanlalkovich.kopatest.view.auth.AuthViewModel
+import com.milanlalkovich.kopatest.view.boots.BootsViewModel
 import com.milanlalkovich.kopatest.view.data_completion.DataCompletionViewModel
+import com.milanlalkovich.kopatest.view.phone_auth.PhoneAuthViewModel
 import com.milanlalkovich.kopatest.view.profile.ProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -12,7 +14,9 @@ import org.koin.dsl.module
  */
 
 val viewModelsModule = module {
+    viewModel { BootsViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { DataCompletionViewModel(get()) }
     viewModel { AuthViewModel(get()) }
+    viewModel { PhoneAuthViewModel(get()) }
 }

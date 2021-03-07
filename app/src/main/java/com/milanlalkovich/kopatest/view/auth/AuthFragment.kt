@@ -56,7 +56,7 @@ class AuthFragment : BaseVMFragment<AuthViewModel, FragmentAuthBinding>() {
 
         viewModel.isExist.nonNullObserve(viewLifecycleOwner) {
             if(it){
-                findNavController().navigate(R.id.action_auth_complete)
+                findNavController().navigate(R.id.action_authFragment_to_menuFragment)
             }else{
                findNavController().navigate(R.id.action_authFragment_to_dataCompletionFragment)
             }

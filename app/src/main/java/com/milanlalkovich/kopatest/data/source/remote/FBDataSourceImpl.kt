@@ -2,6 +2,8 @@ package com.milanlalkovich.kopatest.data.source.remote
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.milanlalkovich.kopatest.domain.model.response.Boots
+import com.milanlalkovich.kopatest.domain.model.response.BootsModel
 import com.milanlalkovich.kopatest.domain.model.response.UserModel
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -59,6 +61,68 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
             }
 
     }
+
+    override fun getBoots(): Single<List<Boots>> = Single.create {
+        db.collection("boots")
+            .get()
+            .addOnSuccessListener { result ->
+                val list: MutableList<Boots> = mutableListOf()
+                for (document in result) {
+
+                    list.add(
+                        Boots(
+                            id = document.id,
+                            imageUrl = document["imageUrl"].toString(),
+                            title = document["title"].toString(),
+                            width = document["width"].toString().toInt(),
+                            length = document["length"].toString().toInt(),
+                            price = document["price"].toString().toInt(),
+                            bootsLength = document["bootsLength"].toString().toInt(),
+                            material = document["material"].toString()
+                        )
+                    )
+                }
+                it.onSuccess(list)
+            }
+            .addOnFailureListener { exception ->
+                it.onError(exception)
+            }
+    }
+
+    override fun getBootsById(id: String): Single<Boots> = Single.create {
+        db.collection("boots")
+            .document(id)
+            .get()
+            .addOnSuccessListener { result ->
+                val boots = Boots(
+                    id = result.id,
+                    imageUrl = result["image"].toString(),
+                    title = result["title"].toString(),
+                    width = result["width"].toString().toInt(),
+                    price = result["price"].toString().toInt(),
+                    bootsLength = result["bootsLength"].toString().toInt(),
+                    material = result["material"].toString(),
+                    description = result["description"].toString(),
+                )
+                it.onSuccess(boots)
+            }
+            .addOnFailureListener { exception ->
+                it.onError(exception)
+            }
+    }
+
+    override fun createBoots(boots: BootsModel): Completable = Completable.create {
+        db.collection("boots")
+            .add(boots)
+            .addOnSuccessListener { result ->
+                it.onComplete()
+            }
+            .addOnFailureListener { exception ->
+                it.onError(exception)
+
+            }
+    }
+
 
 
 }

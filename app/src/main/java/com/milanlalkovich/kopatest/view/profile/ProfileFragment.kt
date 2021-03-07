@@ -2,6 +2,8 @@ package com.milanlalkovich.kopatest.view.profile
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -11,6 +13,7 @@ import com.milanlalkovich.kopatest.R
 import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
 import com.milanlalkovich.kopatest.core.fragment.BaseVMFragment
 import com.milanlalkovich.kopatest.databinding.FragmentProfileBinding
+import com.milanlalkovich.kopatest.view.bottom_navigation.menu.MenuFragment
 import kotlin.reflect.KClass
 
 /**
@@ -44,7 +47,9 @@ class ProfileFragment : BaseVMFragment<ProfileViewModel, FragmentProfileBinding>
 
         binding.profileExitButton.setOnClickListener {
             auth.signOut()
-            findNavController().navigate(R.id.action_signOut)
+            //findNavController().navigate(R.id.action_signOut)
+            Toast.makeText(context?.applicationContext, "Sign out", Toast.LENGTH_SHORT).show()
+            ((parentFragment as NavHostFragment).parentFragment as MenuFragment).navigateToLogin()
         }
     }
 

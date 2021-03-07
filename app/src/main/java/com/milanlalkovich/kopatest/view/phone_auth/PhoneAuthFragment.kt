@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import com.milanlalkovich.kopatest.databinding.FragmentPhoneAuthBinding
 import com.milanlalkovich.kopatest.R
+import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
+import com.milanlalkovich.kopatest.core.fragment.BaseVMFragment
+import com.milanlalkovich.kopatest.databinding.FragmentPhoneAuthBinding
 import java.util.concurrent.TimeUnit
+import kotlin.reflect.KClass
 
 
 /**
@@ -21,21 +23,16 @@ import java.util.concurrent.TimeUnit
  *  Developer: Dima Iakubenko
  */
 
-class PhoneAuthFragment : Fragment() {
+class PhoneAuthFragment : BaseVMFragment<PhoneAuthViewModel, FragmentPhoneAuthBinding>() {
 
-    private lateinit var binding: FragmentPhoneAuthBinding
+    override val viewModelClass: KClass<PhoneAuthViewModel>
+        get() = PhoneAuthViewModel::class
+    override val layoutId: Int
+        get() = R.layout.fragment_phone_auth
+
     private lateinit var auth: FirebaseAuth
     private lateinit var verifyId: String
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPhoneAuthBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,20 +40,26 @@ class PhoneAuthFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         binding.btnNumberVerify.setOnClickListener {
-          if(validateNumber(binding.btnNumberVerify.text.toString())){
-              signIn()
-              binding.editNumber.visibility = View.GONE
-              binding.btnNumberVerify.visibility = View.GONE
+            if (validateNumber(binding.btnNumberVerify.text.toString())) {
+                signIn()
+                binding.editNumber.visibility = View.GONE
+                binding.btnNumberVerify.visibility = View.GONE
 
-              binding.btnCodeVerify.visibility = View.VISIBLE
-              binding.editCode.visibility = View.VISIBLE
-          }
+                binding.btnCodeVerify.visibility = View.VISIBLE
+                binding.editCode.visibility = View.VISIBLE
+            }
         }
 
-        binding.btnCodeVerify.setOnClickListener{
-            verifyCode(binding.editCode.text.toString())
+        viewModel.isExist.nonNullObserve(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigate(R.id.action_phoneAuthFragment_to_menuFragment )
+            } else {
+                findNavController().navigate(R.id.action_phoneAuthFragment_to_dataCompletionFragment )
+            }
+        }
 
-            findNavController().navigate(R.id.action_phoneAuthFragment_to_profileFragment)
+        binding.btnCodeVerify.setOnClickListener {
+            verifyCode(binding.editCode.text.toString())
 
         }
 
@@ -83,7 +86,7 @@ class PhoneAuthFragment : Fragment() {
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-
+                       viewModel.isUserExist()
 
                     val user = task.result?.user
                     // ...

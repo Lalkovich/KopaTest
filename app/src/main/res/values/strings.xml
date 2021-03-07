@@ -18,5 +18,13 @@
     <string name="user_city">Вінниця</string>
     <string name="facebook_app_id">1277174422681967</string>
     <string name="fb_login_protocol_scheme">fb1277174422681967</string>
+    <string name="title">Nike</string>
+    <string name="sizeBoots">Розмір стопи: </string>
+    <string name="material">Матеріал:</string>
+    <string name="materialTitle">leather</string>
+    <string name="standarts">EU</string>
+    <string name="width">Ширина / см</string>
+    <string name="length">Довжина / см</string>
+    <string name="price">100$</string>
 
 </resources>

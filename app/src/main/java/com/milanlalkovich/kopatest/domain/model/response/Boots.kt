@@ -1,18 +1,15 @@
 package com.milanlalkovich.kopatest.domain.model.response
 
-import com.google.gson.annotations.SerializedName
-
 data class Boots(
-    @SerializedName("image")
     var imageUrl: String = "",
-    @SerializedName("title")
     var title: String = "",
-    @SerializedName("width")
     var width: Int? = null,
-    @SerializedName("price")
+    var length: Int? = null,
     var price: Int? = null,
-    @SerializedName("bootsLength")
     var bootsLength: Int? = null,
-    @SerializedName("material")
-    var material: String = ""
+    var material: String = "",
+    var description: String = "",
+    var id: String,
+    //var isAchieved: Boolean = false,
+    //var userUid: String = ""
 )

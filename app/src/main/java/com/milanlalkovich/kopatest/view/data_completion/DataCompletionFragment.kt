@@ -29,7 +29,7 @@ class DataCompletionFragment :
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.userCreated.nonNullObserve(viewLifecycleOwner){
-            findNavController().navigate(R.id.action_dataCompletionFragment_to_profileFragment)
+            findNavController().navigate(R.id.action_dataCompletionFragment_to_menuFragment)
         }
         binding.btnAuthCompletion.setOnClickListener {
             val newUser = UserModel(

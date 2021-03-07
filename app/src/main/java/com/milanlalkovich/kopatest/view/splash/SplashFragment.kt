@@ -35,7 +35,7 @@ class SplashFragment : Fragment() {
         Handler(Looper.getMainLooper())
             .postDelayed({
                 if (user != null) {
-                    findNavController().navigate(R.id.action_splashFragment_to_profileFragment)
+                    findNavController().navigate(R.id.action_splashFragment_to_menuFragment)
                 } else {
                     findNavController().navigate(R.id.action_splashFragment_to_authFragment)
                 }
