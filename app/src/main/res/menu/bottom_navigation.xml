@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainScreenFragment2"
+        android:icon="@drawable/ic_visualization"
+        android:title="" />
+    <item
+        android:id="@+id/myPostsFragment2"
+        android:icon="@drawable/ic_kopa"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_hidden_option"
+        android:icon="@drawable/ic_action_data"
+        android:title="" />
+
+    <item
+        android:id="@+id/favouriteScreenFragment2"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="" />
+
+    <item
+        android:id="@+id/profileFragment2"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="" />
+
+</menu>

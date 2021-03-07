@@ -14,4 +14,6 @@ interface BootsRepository {
     fun getBoots() : Single<List<Boots>>
     fun getBootsById(id: String) : Single<Boots>
     fun createBoots(boots: BootsModel) : Completable
+    fun getArchivedBoots(): Single<List<Boots>>
+    fun getActiveBoots(): Single<List<Boots>>
 }

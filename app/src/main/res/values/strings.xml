@@ -26,5 +26,47 @@
     <string name="width">Ширина / см</string>
     <string name="length">Довжина / см</string>
     <string name="price">100$</string>
+    <string name="sizeOfFoot">Розміри стопи:</string>
+    <string name="save">Зберегти</string>
+    <string name="size">Розмір</string>
+    <string name="addPhoto">Додати фото</string>
+    <string name="model">Модель</string>
+    <string name="description_post">Опис</string>
+    <string name="price_post">Ціна</string>
+    <string name="material_post">Матеріал</string>
+    <string name="description">Опис про товар і як довго носив кросівки чи специфічні деталі взуття. натирало чи ні.
+        чи дуло задувало. на широку ногу чи сайз не відповідає зязвленому. хвалиш взуття щоб точно купили.
+        бо подарували дві пари, а ти за літо ще ні одної не зносив.</string>
+    <string name="seller">Продавець</string>
+
+    <string-array name="model_array">
+        <item>Nike airmax</item>
+        <item>Nike 2200</item>
+        <item>Nike 2190</item>
+    </string-array>
+
+    <string-array name="size_array">
+        <item>22.5</item>
+        <item>23</item>
+        <item>23.5</item>
+    </string-array>
+
+    <string-array name="length">
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+    </string-array>
+
+    <string-array name="width_array">
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+    </string-array>
+
+    <string name="text_label_1">Active</string>
+    <string name="text_label_2">Archived</string>
 
 </resources>

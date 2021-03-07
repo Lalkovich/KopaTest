@@ -78,7 +78,8 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             length = document["length"].toString().toInt(),
                             price = document["price"].toString().toInt(),
                             bootsLength = document["bootsLength"].toString().toInt(),
-                            material = document["material"].toString()
+                            material = document["material"].toString(),
+                            isArchived = document["isAchieved"].toString().toBoolean()
                         )
                     )
                 }
@@ -103,6 +104,8 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                     bootsLength = result["bootsLength"].toString().toInt(),
                     material = result["material"].toString(),
                     description = result["description"].toString(),
+                    isArchived = result["isAchieved"].toString().toBoolean(),
+                    userUid = result["userUid"].toString()
                 )
                 it.onSuccess(boots)
             }
@@ -123,6 +126,70 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
             }
     }
 
+    override fun getArchivedBoots(): Single<List<Boots>> = Single.create{
+        db.collection("boots")
+            .whereEqualTo("isArchived",true)
+            .whereEqualTo("userUid",FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .get()
+            .addOnSuccessListener { result ->
+                val list: MutableList<Boots> = mutableListOf()
+                for (document in result) {
 
+                    list.add(
+                        Boots(
+                            id = document.id,
+                            imageUrl = document["imageUrl"].toString(),
+                            title = document["title"].toString(),
+                            width = document["width"].toString().toInt(),
+                            length = document["length"].toString().toInt(),
+                            price = document["price"].toString().toInt(),
+                            bootsLength = document["bootsLength"].toString().toInt(),
+                            material = document["material"].toString(),
+                            isArchived = document["isAchieved"].toString().toBoolean(),
+                            userUid = document["userUid"].toString()
+                        )
+                    )
+                }
+                it.onSuccess(list)
+            }
+            .addOnFailureListener { exception ->
+                it.onError(exception)
+            }
+
+
+    }
+
+    override fun getActiveBoots(): Single<List<Boots>> = Single.create{
+        db.collection("boots")
+            .whereEqualTo("isArchived",false)
+            .whereEqualTo("userUid",FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .get()
+            .addOnSuccessListener { result ->
+                val list: MutableList<Boots> = mutableListOf()
+                for (document in result) {
+
+                    list.add(
+                        Boots(
+                            id = document.id,
+                            imageUrl = document["imageUrl"].toString(),
+                            title = document["title"].toString(),
+                            width = document["width"].toString().toInt(),
+                            length = document["length"].toString().toInt(),
+                            price = document["price"].toString().toInt(),
+                            bootsLength = document["bootsLength"].toString().toInt(),
+                            material = document["material"].toString(),
+                            isArchived = document["isAchieved"].toString().toBoolean(),
+                            userUid = document["userUid"].toString()
+                        )
+                    )
+                }
+                it.onSuccess(list)
+            }
+            .addOnFailureListener { exception ->
+                it.onError(exception)
+            }
+
+
+    }
 
 }

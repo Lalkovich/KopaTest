@@ -1,6 +1,6 @@
 package com.milanlalkovich.kopatest
 import android.app.Application
-import com.example.kopashop.di.firebaseDataSourceModule
+import com.milanlalkovich.kopatest.di.firebaseDataSourceModule
 import com.milanlalkovich.kopatest.di.repositoriesModule
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger

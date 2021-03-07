@@ -72,10 +72,18 @@
         <action
             android:id="@+id/action_menuFragment_to_authFragment"
             app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.milanlalkovich.kopatest.view.bottom_navigation.add_post.AddPostFragment"
         android:label="AddPostFragment"
         tools:layout="@layout/fragment_add_post"/>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.milanlalkovich.kopatest.view.about_fragment.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about"/>
 </navigation>

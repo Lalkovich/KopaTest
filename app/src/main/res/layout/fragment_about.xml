@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.milanlalkovich.kopatest.domain.model.response.Boots" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_list"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".view.about.AboutFragment">
+
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:ci_drawable="@color/white"
+                app:ci_drawable_unselected="@color/white"
+                app:ci_height="5dp"
+                app:ci_margin="5dp"
+                app:ci_width="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivAbout" />
+
+            <ImageView
+                android:id="@+id/ivAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/indicator"
+                android:background="@drawable/temp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_rectangle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/indicator" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{String.valueOf(item.price)}"
+                android:textColor="@color/list_price"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/rectangle"
+                app:layout_constraintLeft_toLeftOf="@id/rectangle"
+                app:layout_constraintRight_toRightOf="@id/rectangle"
+                app:layout_constraintTop_toTopOf="@id/rectangle" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:foreground="@drawable/checkbox_favourite_selector"
+                android:foregroundGravity="center"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/indicator" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@{item.title}"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rectangle" />
+
+            <TextView
+                android:id="@+id/sizeOfFoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/sizeOfFoot"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <TextView
+                android:id="@+id/bootsLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:text="@{String.valueOf(item.bootsLength)}"
+                android:textColor="@color/aqua"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@id/euSize"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sizeOfFoot" />
+
+            <TextView
+                android:id="@+id/length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="36dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{String.valueOf(item.bootsLength)}"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/lengthTitle"
+                app:layout_constraintLeft_toRightOf="@id/bootsLength" />
+
+            <TextView
+                android:id="@+id/width"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="76dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{String.valueOf(item.width)}"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/widthTitle"
+                app:layout_constraintLeft_toRightOf="@id/length" />
+
+            <TextView
+                android:id="@+id/euSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="EU"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@id/material"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/lengthTitle"
+                app:layout_constraintTop_toBottomOf="@id/bootsLength" />
+
+            <TextView
+                android:id="@+id/lengthTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/length"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@id/materialTitle"
+                app:layout_constraintLeft_toRightOf="@id/euSize"
+                app:layout_constraintRight_toLeftOf="@id/widthTitle" />
+
+            <TextView
+                android:id="@+id/widthTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/width"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@id/materialTitle"
+                app:layout_constraintLeft_toRightOf="@id/lengthTitle" />
+
+            <TextView
+                android:id="@+id/material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/material"
+                android:textColor="@color/list_text"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/euSize" />
+
+            <TextView
+                android:id="@id/materialTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@{item.material}"
+                android:textColor="@color/list_text"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toRightOf="@id/material"
+                app:layout_constraintTop_toBottomOf="@id/euSize" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.description}"
+                android:textColor="@color/list_text"
+                app:layout_constraintBottom_toTopOf="@id/seller_layout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/materialTitle" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/seller_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/user_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description">
+
+                <ImageView
+                    android:id="@+id/ivUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/ic_seller"
+                    app:layout_constraintBottom_toBottomOf="@id/seller_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/seller_layout"
+                    app:layout_constraintRight_toLeftOf="@id/tvUser"
+                    app:layout_constraintTop_toTopOf="@id/seller_layout" />
+
+                <TextView
+                    android:id="@+id/tvUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="@string/seller"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="@id/seller_layout"
+                    app:layout_constraintLeft_toRightOf="@id/ivUser"
+                    app:layout_constraintTop_toTopOf="@id/seller_layout" />
+
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvUser"
+                    app:layout_constraintLeft_toRightOf="@id/ivUser"/>
+
+                <ImageView
+                    android:id="@+id/call_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_call_seller"
+                    app:layout_constraintBottom_toBottomOf="@id/seller_layout"
+                    app:layout_constraintRight_toRightOf="@id/seller_layout"
+                    app:layout_constraintTop_toTopOf="@id/seller_layout" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

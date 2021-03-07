@@ -15,4 +15,8 @@
     <color name="list_text">#9A9A9A</color>
     <color name="list_price">#434343</color>
     <color name="image_list">#343434</color>
+    <color name="aqua">#0CCDE6</color>
+    <color name="user_background">#232326</color>
+    <color name="background_layout">#1F1F1F</color>
+    <color name="red">#FF0000</color>
 </resources>

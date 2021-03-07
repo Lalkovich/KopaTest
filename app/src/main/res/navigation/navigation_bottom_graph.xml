@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bottom_graph"
+    app:startDestination="@id/mainScreenFragment2">
+
+    <fragment
+        android:id="@+id/mainScreenFragment2"
+        android:name="com.milanlalkovich.kopatest.view.bottom_navigation.main_screen.MainScreenFragment"
+        android:label="MainScreenFragment"
+        tools:layout="@layout/fragment_main_screen"/>
+    <fragment
+        android:id="@+id/favouriteScreenFragment2"
+        android:name="com.milanlalkovich.kopatest.view.bottom_navigation.favourite_screen.FavouriteScreenFragment"
+        android:label="FavouriteScreenFragment"
+        tools:layout="@layout/fragment_favourite_screen"/>
+    <fragment
+        android:id="@+id/myPostsFragment2"
+        android:name="com.milanlalkovich.kopatest.view.bottom_navigation.my_posts.MyPostsFragment"
+        android:label="MyPostsFragment"
+        tools:layout="@layout/fragment_my_posts"/>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.milanlalkovich.kopatest.view.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+
+</navigation>
