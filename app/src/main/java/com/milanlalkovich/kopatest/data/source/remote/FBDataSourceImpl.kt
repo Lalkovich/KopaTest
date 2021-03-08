@@ -98,7 +98,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
             .addOnSuccessListener { result ->
                 val boots = Boots(
                     id = result.id,
-                    imageUrl = result["image"].toString(),
+                    imageUrl = result["imageUrl"].toString(),
                     title = result["title"].toString(),
                     width = result["width"].toString().toInt(),
                     price = result["price"].toString().toInt(),

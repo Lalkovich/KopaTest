@@ -8,6 +8,7 @@ import com.milanlalkovich.kopatest.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 /**
  *  Created by Android Studio on 15.02.2021 21:23
@@ -26,6 +27,7 @@ class Application : Application() {
                 repositoriesModule,
                 viewModelsModule
             )}
+        Timber.plant(Timber.DebugTree())
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);

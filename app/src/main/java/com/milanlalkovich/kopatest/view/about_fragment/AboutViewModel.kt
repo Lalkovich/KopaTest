@@ -8,6 +8,7 @@ import com.milanlalkovich.kopatest.domain.repository.BootsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 /**
  *  Created by Android Studio on 07.03.2021 13:44
@@ -25,6 +26,7 @@ class AboutViewModel(private val bootsRepository: BootsRepository) : BaseViewMod
             .subscribeBy(
                 onSuccess = {
                     _boots.postValue(it)
+                    Timber.d(it.toString())
                 },
                 onError = {
                     timber.log.Timber.d(it)
