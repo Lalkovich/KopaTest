@@ -19,4 +19,5 @@
     <color name="user_background">#232326</color>
     <color name="background_layout">#1F1F1F</color>
     <color name="red">#FF0000</color>
+    <color name="light_blue">#0CCDE6</color>
 </resources>

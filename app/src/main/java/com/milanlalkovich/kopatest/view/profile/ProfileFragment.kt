@@ -42,8 +42,11 @@ class ProfileFragment : BaseVMFragment<ProfileViewModel, FragmentProfileBinding>
         }
 
         val user = auth.currentUser
-
-        Glide.with(this).load(user?.photoUrl).transform(CircleCrop()).into(binding.profileFace)
+           if(user?.photoUrl == null){
+               Glide.with(this).load("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg").transform(CircleCrop()).into(binding.profileFace)
+           }else{
+               Glide.with(this).load(user?.photoUrl).transform(CircleCrop()).into(binding.profileFace)
+           }
 
         binding.profileExitButton.setOnClickListener {
             auth.signOut()

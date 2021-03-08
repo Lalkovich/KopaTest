@@ -45,11 +45,12 @@ class AddPostFragment : BaseVMFragment<AddPostViewModel, FragmentAddPostBinding>
             viewModel.createBoots(
                 BootsModel(
                     description = binding.etDescription.text.toString(),
-                    material = binding.spinnerMaterial.selectedItemPosition.toString(),
+                    material = binding.spinnerMaterial.selectedItem.toString(),
                     price = binding.etPrice.text.toString().toInt(),
                     title = binding.etModel.text.toString(),
-                    width = binding.spinnerWidth.selectedItemPosition.toString().toInt(),
-                    bootsLength = binding.spinnerLength.selectedItemPosition.toString().toInt(),
+                    length = binding.spinnerSize.selectedItem.toString().toInt(),
+                    width = binding.spinnerWidth.selectedItem.toString().toInt(),
+                    bootsLength = binding.spinnerLength.selectedItem.toString().toInt(),
                     isArchived = false,
                     userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
                 )

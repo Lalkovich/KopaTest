@@ -1,7 +1,9 @@
 package com.milanlalkovich.kopatest.view.data_completion
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.milanlalkovich.kopatest.R
@@ -38,8 +40,23 @@ class DataCompletionFragment :
                 number = binding.numberEdit.text.toString(),
                 city = binding.city.text.toString()
             )
-            viewModel.createUser(newUser)
-
+            fun isDataFull(){
+                if(newUser.fname.isEmpty()){
+                    binding.fname.error = "Введите имя"
+                }
+                else if(newUser.sname.isEmpty()){
+                    binding.sname.error = "Введите фамилию"
+                }
+                else if(newUser.city.isEmpty()){
+                    binding.city.error = "Введите название города"
+                }
+                else if(newUser.number.isEmpty()){
+                    binding.numberEdit.error = "Введите свой номер"
+                }else{
+                    viewModel.createUser(newUser)
+                }
+            }
+            isDataFull()
         }
     }
 }

@@ -45,7 +45,7 @@ val firebaseDataSourceModule = module {
         converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://api.themoviedb.org/")
             .client(httpClient)
             .addCallAdapterFactory(callAdapterFactory)
             .addConverterFactory(converterFactory)

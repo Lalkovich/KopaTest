@@ -66,17 +66,8 @@ class PhoneAuthFragment : BaseVMFragment<PhoneAuthViewModel, FragmentPhoneAuthBi
     }
 
     private fun validateNumber(input: String): Boolean {
-        if (input.isNotEmpty() && Patterns.PHONE.matcher(binding.editNumber.text.toString())
-                .matches()
-        ) {
-            Toast.makeText(context?.applicationContext, "Validate Success", Toast.LENGTH_SHORT)
-                .show()
-            return true
-        } else {
-            Toast.makeText(context?.applicationContext, "Validate Failed", Toast.LENGTH_SHORT)
-                .show()
-            return false
-        }
+        return input.isNotEmpty() && Patterns.PHONE.matcher(binding.editNumber.text.toString())
+            .matches()
 
     }
 
