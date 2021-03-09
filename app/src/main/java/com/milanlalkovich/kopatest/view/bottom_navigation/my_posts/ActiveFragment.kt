@@ -10,6 +10,7 @@ import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
 import com.milanlalkovich.kopatest.core.fragment.BaseVMFragment
 import com.milanlalkovich.kopatest.databinding.FragmentActiveBinding
 import com.milanlalkovich.kopatest.view.boots.BootsAdapter
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import kotlin.reflect.KClass
 
 /**
@@ -23,6 +24,8 @@ class ActiveFragment: BaseVMFragment<MyPostsViewModel,FragmentActiveBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_active
 
+
+
     private val adapter: BootsAdapter = BootsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,10 +34,9 @@ class ActiveFragment: BaseVMFragment<MyPostsViewModel,FragmentActiveBinding>() {
         binding.listActive.adapter = adapter
 
         adapter.setOnClickListener {
-            (parentFragment as NavHostFragment)
-                .parentFragment
-                ?.findNavController()
-                ?.navigate(R.id.action_menuFragment_to_aboutFragment, bundleOf("boots_id" to it))
+            (parentFragment as MyPostsFragment)
+                .navigateToDetails(bundleOf("boots_id" to it))
+
         }
 
         viewModel.active.nonNullObserve(viewLifecycleOwner) {
@@ -44,5 +46,9 @@ class ActiveFragment: BaseVMFragment<MyPostsViewModel,FragmentActiveBinding>() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getActiveBoots()
         }
+    }
+
+    override fun initViewModel(): MyPostsViewModel {
+        return getSharedViewModel()
     }
 }

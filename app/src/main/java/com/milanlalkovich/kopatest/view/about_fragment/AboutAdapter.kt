@@ -19,7 +19,7 @@ class AboutAdapter(): BaseRecyclerViewAdapter<Boots, FragmentAboutBinding>(Boots
 
     override fun onBindViewHolder(holder: BindingHolder<FragmentAboutBinding>, position: Int) {
         val item = getItem(holder.adapterPosition)
-        holder.binding.title.text = item.title
+        /*holder.binding.title.text = item.title
         holder.binding.bootsLength.text = item.bootsLength.toString()
         holder.binding.material.text = item.material
         holder.binding.price.text = item.price.toString()
@@ -28,6 +28,6 @@ class AboutAdapter(): BaseRecyclerViewAdapter<Boots, FragmentAboutBinding>(Boots
 
         Glide.with(holder.itemView.context)
             .load(item.imageUrl)
-            .into(holder.binding.ivAbout)
+            .into(holder.binding.ivAbout)*/
     }
 }

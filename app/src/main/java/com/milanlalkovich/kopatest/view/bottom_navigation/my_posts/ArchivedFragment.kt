@@ -10,6 +10,7 @@ import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
 import com.milanlalkovich.kopatest.core.fragment.BaseVMFragment
 import com.milanlalkovich.kopatest.databinding.FragmentArchivedBinding
 import com.milanlalkovich.kopatest.view.boots.BootsAdapter
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import kotlin.reflect.KClass
 
 /**
@@ -31,18 +32,21 @@ class ArchivedFragment: BaseVMFragment<MyPostsViewModel,FragmentArchivedBinding>
         binding.listArchived.adapter = adapter
 
         adapter.setOnClickListener {
-            (parentFragment as NavHostFragment)
-                .parentFragment
-                ?.findNavController()
-                ?.navigate(R.id.action_menuFragment_to_aboutFragment, bundleOf("boots_id" to it))
+            (parentFragment as MyPostsFragment)
+                .navigateToDetails(bundleOf("boots_id" to it))
+
         }
 
-        viewModel.active.nonNullObserve(viewLifecycleOwner) {
+        viewModel.archived.nonNullObserve(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getArchivedBoots()
         }
+    }
+
+    override fun initViewModel(): MyPostsViewModel {
+        return getSharedViewModel()
     }
 }

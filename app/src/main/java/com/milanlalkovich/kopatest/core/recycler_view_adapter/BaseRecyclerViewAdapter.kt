@@ -7,10 +7,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
-/**
- *  Created by Android Studio on 3/10/2020 3:14 PM
- *  Developer: Sergey Zorych
- */
 
 abstract class BaseRecyclerViewAdapter<T, Binding : ViewDataBinding>(
     diffCallback: DiffUtil.ItemCallback<T>

@@ -1,10 +1,9 @@
 package com.milanlalkovich.kopatest.view.data_completion
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.milanlalkovich.kopatest.R
 import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
@@ -21,6 +20,7 @@ import kotlin.reflect.KClass
 class DataCompletionFragment :
     BaseVMFragment<DataCompletionViewModel, FragmentDataCompletionBinding>() {
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var auth: FirebaseAuth
 
     override val layoutId: Int
         get() = R.layout.fragment_data_completion
@@ -29,8 +29,19 @@ class DataCompletionFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
 
-        viewModel.userCreated.nonNullObserve(viewLifecycleOwner){
+        if (auth.currentUser?.displayName.isNullOrEmpty().not()) {
+            val splitName = auth.currentUser?.displayName?.split(' ')
+            binding.fname.setText(splitName?.get(0) ?: "")
+            binding.sname.setText(splitName?.get(1) ?: "")
+        }
+        if(auth.currentUser?.phoneNumber.isNullOrEmpty().not())
+        {
+            binding.numberEdit.setText(auth.currentUser?.phoneNumber)
+        }
+
+        viewModel.userCreated.nonNullObserve(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_dataCompletionFragment_to_menuFragment)
         }
         binding.btnAuthCompletion.setOnClickListener {
@@ -40,19 +51,17 @@ class DataCompletionFragment :
                 number = binding.numberEdit.text.toString(),
                 city = binding.city.text.toString()
             )
-            fun isDataFull(){
-                if(newUser.fname.isEmpty()){
+
+            fun isDataFull() {
+                if (newUser.fname.isEmpty()) {
                     binding.fname.error = "Введите имя"
-                }
-                else if(newUser.sname.isEmpty()){
+                } else if (newUser.sname.isEmpty()) {
                     binding.sname.error = "Введите фамилию"
-                }
-                else if(newUser.city.isEmpty()){
+                } else if (newUser.city.isEmpty()) {
                     binding.city.error = "Введите название города"
-                }
-                else if(newUser.number.isEmpty()){
+                } else if (newUser.number.isEmpty()) {
                     binding.numberEdit.error = "Введите свой номер"
-                }else{
+                } else {
                     viewModel.createUser(newUser)
                 }
             }

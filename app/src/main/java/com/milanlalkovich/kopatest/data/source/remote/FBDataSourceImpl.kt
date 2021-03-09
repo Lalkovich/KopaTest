@@ -79,7 +79,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             price = document["price"].toString().toInt(),
                             bootsLength = document["bootsLength"].toString().toInt(),
                             material = document["material"].toString(),
-                            isArchived = document["isAchieved"].toString().toBoolean(),
+                            isArchived = document["archived"].toString().toBoolean(),
                             userUid = document["userUid"].toString()
                         )
                     )
@@ -105,7 +105,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                     bootsLength = result["bootsLength"].toString().toInt(),
                     material = result["material"].toString(),
                     description = result["description"].toString(),
-                    isArchived = result["isAchieved"].toString().toBoolean(),
+                    isArchived = result["archived"].toString().toBoolean(),
                     userUid = result["userUid"].toString()
                 )
                 it.onSuccess(boots)
@@ -129,8 +129,8 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
 
     override fun getArchivedBoots(): Single<List<Boots>> = Single.create {
         db.collection("boots")
-            .whereEqualTo("isArchived", true)
             .whereEqualTo("userUid", FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .whereEqualTo("archived", true)
             .get()
             .addOnSuccessListener { result ->
                 val list: MutableList<Boots> = mutableListOf()
@@ -146,7 +146,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             price = document["price"].toString().toInt(),
                             bootsLength = document["bootsLength"].toString().toInt(),
                             material = document["material"].toString(),
-                            isArchived = document["isAchieved"].toString().toBoolean(),
+                            isArchived = document["archived"].toString().toBoolean(),
                             userUid = document["userUid"].toString()
                         )
                     )
@@ -162,8 +162,8 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
 
     override fun getActiveBoots(): Single<List<Boots>> = Single.create {
         db.collection("boots")
-            .whereEqualTo("isArchived", false)
             .whereEqualTo("userUid", FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .whereEqualTo("archived", false)
             .get()
             .addOnSuccessListener { result ->
                 val list: MutableList<Boots> = mutableListOf()
@@ -179,7 +179,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             price = document["price"].toString().toInt(),
                             bootsLength = document["bootsLength"].toString().toInt(),
                             material = document["material"].toString(),
-                            isArchived = document["isAchieved"].toString().toBoolean(),
+                            isArchived = document["archived"].toString().toBoolean(),
                             userUid = document["userUid"].toString()
                         )
                     )

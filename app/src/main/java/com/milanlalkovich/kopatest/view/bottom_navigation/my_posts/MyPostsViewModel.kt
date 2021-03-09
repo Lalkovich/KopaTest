@@ -21,6 +21,11 @@ class MyPostsViewModel(private val apiRepository: BootsRepository) : BaseViewMod
     private val _archived = MutableLiveData<List<Boots>>()
     val archived: LiveData<List<Boots>> = _archived
 
+    init {
+        getArchivedBoots()
+        getActiveBoots()
+    }
+
     fun getActiveBoots(){
         disposables + apiRepository.getActiveBoots()
             .subscribeOn(Schedulers.io())
