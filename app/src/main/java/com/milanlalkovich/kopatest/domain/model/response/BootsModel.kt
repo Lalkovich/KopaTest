@@ -8,7 +8,7 @@ import com.milanlalkovich.kopatest.domain.entity.ImageEntity
  */
 
 data class BootsModel(
-    var imageUrl: String = "",
+    var images: List<String> = listOf(),
     var title: String = "",
     var width: Int? = null,
     var price: Int? = null,

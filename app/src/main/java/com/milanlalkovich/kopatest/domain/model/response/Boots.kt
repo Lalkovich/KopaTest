@@ -1,7 +1,7 @@
 package com.milanlalkovich.kopatest.domain.model.response
 
 data class Boots(
-    var imageUrl: String = "",
+    var images: List<String> = listOf(),
     var title: String = "",
     var width: Int? = null,
     var length: Int? = null,

@@ -73,7 +73,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                     list.add(
                         Boots(
                             id = document.id,
-                            imageUrl = document["imageUrl"].toString(),
+                            images = document["images"] as? List<String> ?: listOf(),
                             title = document["title"].toString(),
                             width = document["width"].toString().toInt(),
                             length = document["length"].toString().toInt(),
@@ -99,7 +99,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
             .addOnSuccessListener { result ->
                 val boots = Boots(
                     id = result.id,
-                    imageUrl = result["imageUrl"].toString(),
+                    images = result["images"] as? List<String> ?: listOf(),
                     title = result["title"].toString(),
                     width = result["width"].toString().toInt(),
                     price = result["price"].toString().toInt(),
@@ -140,7 +140,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                     list.add(
                         Boots(
                             id = document.id,
-                            imageUrl = document["imageUrl"].toString(),
+                            images = document["images"] as? List<String> ?: listOf(),
                             title = document["title"].toString(),
                             width = document["width"].toString().toInt(),
                             length = document["length"].toString().toInt(),
@@ -173,7 +173,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                     list.add(
                         Boots(
                             id = document.id,
-                            imageUrl = document["imageUrl"].toString(),
+                            images = document["images"] as? List<String> ?: listOf(),
                             title = document["title"].toString(),
                             width = document["width"].toString().toInt(),
                             length = document["length"].toString().toInt(),
