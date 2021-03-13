@@ -17,6 +17,7 @@ import com.milanlalkovich.kopatest.databinding.FragmentAddPostBinding
 import com.milanlalkovich.kopatest.domain.entity.ImageEntity
 import com.milanlalkovich.kopatest.domain.model.response.BootsModel
 import java.io.ByteArrayOutputStream
+import java.util.*
 import kotlin.reflect.KClass
 
 
@@ -64,6 +65,15 @@ class AddPostFragment : BaseVMFragment<AddPostViewModel, FragmentAddPostBinding>
         }
 
         binding.save.setOnClickListener {
+            var ref:StorageReference = storageRef.child("*image/" + UUID.randomUUID().toString())
+            image.forEach{
+                if(it is ImageEntity.Image)
+                {
+                    if(it.imageUri != null){
+                        ref.putFile(it.imageUri!!)
+                    }
+                }
+            }
             viewModel.createBoots(
                 BootsModel(
                     description = binding.etDescription.text.toString(),
