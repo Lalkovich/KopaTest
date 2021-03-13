@@ -1,8 +1,10 @@
 package com.milanlalkovich.kopatest.domain.entity
 
-sealed class ImageEntity{
-    object SelectImage: ImageEntity()
+import android.net.Uri
+
+sealed class ImageEntity {
+    object SelectImage : ImageEntity()
     data class Image(
-        var imageUrl: String = ""
+        var imageUri: Uri? = null
     ) : ImageEntity()
 }

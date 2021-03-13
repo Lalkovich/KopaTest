@@ -64,6 +64,7 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
 
     override fun getBoots(): Single<List<Boots>> = Single.create {
         db.collection("boots")
+            .whereEqualTo("archived",false)
             .get()
             .addOnSuccessListener { result ->
                 val list: MutableList<Boots> = mutableListOf()

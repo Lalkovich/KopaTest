@@ -25,7 +25,7 @@ class MyPostsFragment : BaseVMFragment<MyPostsViewModel, FragmentMyPostsBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter: ViewStateAdapter = ViewStateAdapter(this)
+        val adapter = ViewStateAdapter(this)
 
         binding.viewPagerFragment.adapter = adapter
 

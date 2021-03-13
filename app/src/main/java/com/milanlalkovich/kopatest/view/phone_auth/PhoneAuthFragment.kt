@@ -100,6 +100,7 @@ class PhoneAuthFragment : BaseVMFragment<PhoneAuthViewModel, FragmentPhoneAuthBi
                 override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                     val code = credential.smsCode
                     if (code != null) {
+                        binding.editCode.setText(code)
                         verifyCode(code)
                     } else {
                         signInWithPhoneAuthCredential(credential)
