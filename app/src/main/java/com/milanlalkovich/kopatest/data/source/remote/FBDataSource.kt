@@ -1,5 +1,6 @@
 package com.milanlalkovich.kopatest.data.source.remote
 
+import android.net.Uri
 import com.milanlalkovich.kopatest.domain.model.response.Boots
 import com.milanlalkovich.kopatest.domain.model.response.BootsModel
 import com.milanlalkovich.kopatest.domain.model.response.UserModel
@@ -20,4 +21,5 @@ interface FBDataSource {
     fun createBoots(boots: BootsModel) : Completable
     fun getArchivedBoots(): Single<List<Boots>>
     fun getActiveBoots(): Single<List<Boots>>
+    fun uploadImages(images: List<Uri>): Single<List<String>>
 }

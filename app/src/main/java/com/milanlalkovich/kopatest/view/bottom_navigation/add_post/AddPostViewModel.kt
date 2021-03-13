@@ -1,5 +1,6 @@
 package com.milanlalkovich.kopatest.view.bottom_navigation.add_post
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.milanlalkovich.kopatest.core.view_model.BaseViewModel
@@ -18,8 +19,12 @@ class AddPostViewModel(private val bootsRepository: BootsRepository) : BaseViewM
     private val _boots = MutableLiveData<Unit>()
     val boots: LiveData<Unit> = _boots
 
-    fun createBoots(boots: BootsModel) {
-        disposables + bootsRepository.createBoots(boots)
+    fun createBoots(images: List<Uri>, boots: BootsModel) {
+        disposables + bootsRepository.uploadImages(images)
+            .flatMapCompletable {
+                boots.images = it
+                bootsRepository.createBoots(boots)
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

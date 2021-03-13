@@ -1,5 +1,6 @@
 package com.milanlalkovich.kopatest.data.repository
 
+import android.net.Uri
 import com.milanlalkovich.kopatest.data.source.remote.FBDataSource
 import com.milanlalkovich.kopatest.domain.model.response.Boots
 import com.milanlalkovich.kopatest.domain.model.response.BootsModel
@@ -18,4 +19,5 @@ class BootsRepositoryImpl(private val firebaseDataSource: FBDataSource) : BootsR
     override fun createBoots(boots: BootsModel): Completable = firebaseDataSource.createBoots(boots)
     override fun getArchivedBoots(): Single<List<Boots>> = firebaseDataSource.getArchivedBoots()
     override fun getActiveBoots(): Single<List<Boots>> = firebaseDataSource.getActiveBoots()
+    override fun uploadImages(images: List<Uri>): Single<List<String>> = firebaseDataSource.uploadImages(images)
 }

@@ -1,5 +1,6 @@
 package com.milanlalkovich.kopatest.domain.repository
 
+import android.net.Uri
 import com.milanlalkovich.kopatest.domain.model.response.Boots
 import com.milanlalkovich.kopatest.domain.model.response.BootsModel
 import io.reactivex.Completable
@@ -16,4 +17,5 @@ interface BootsRepository {
     fun createBoots(boots: BootsModel) : Completable
     fun getArchivedBoots(): Single<List<Boots>>
     fun getActiveBoots(): Single<List<Boots>>
+    fun uploadImages(images: List<Uri>): Single<List<String>>
 }

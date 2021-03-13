@@ -47,7 +47,7 @@ class AboutFragment : BaseVMFragment<AboutViewModel, FragmentAboutBinding>() {
             binding.description.text = it.description
 
             Glide.with(this)
-                .load(it.imageUrl)
+                .load(it.images[0])
                 .into(binding.ivAbout)
                 Timber.d(it.toString())
             binding.item = it

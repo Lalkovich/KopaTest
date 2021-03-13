@@ -1,13 +1,18 @@
 package com.milanlalkovich.kopatest.data.source.remote
 
+import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.milanlalkovich.kopatest.domain.model.response.Boots
 import com.milanlalkovich.kopatest.domain.model.response.BootsModel
 import com.milanlalkovich.kopatest.domain.model.response.UserModel
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Retrofit
+import java.util.*
 
 /**
  *  Created by Android Studio on 20.02.2021 14:12
@@ -192,6 +197,32 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
             }
 
 
+    }
+
+    override fun uploadImages(images: List<Uri>): Single<List<String>> {
+        val storage: FirebaseStorage =
+            FirebaseStorage.getInstance("gs://kopatest-f6e8d.appspot.com")
+        val storageRef = storage.reference
+        val ref: StorageReference = storageRef.child("*image/" + UUID.randomUUID().toString())
+
+        return Observable.fromIterable(images)
+            .flatMapSingle { uri ->
+                Single.create<String> {
+                    val uploadTask = ref.putFile(uri)
+                    uploadTask.continueWithTask { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        ref.downloadUrl
+                    }.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            it.onSuccess(task.result.toString())
+                        }
+                    }
+                }
+            }.toList()
     }
 
 }

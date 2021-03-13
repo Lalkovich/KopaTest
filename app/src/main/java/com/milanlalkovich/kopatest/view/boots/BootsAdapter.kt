@@ -35,7 +35,7 @@ class BootsAdapter:BaseRecyclerViewAdapter<Boots,ListLayoutBinding>(BootsDiffCal
         }
 
         Glide.with(holder.itemView.context)
-            .load(item.imageUrl)
+            .load(item.images[0])
             .into(holder.binding.image)
     }
 

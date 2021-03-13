@@ -65,16 +65,10 @@ class AddPostFragment : BaseVMFragment<AddPostViewModel, FragmentAddPostBinding>
         }
 
         binding.save.setOnClickListener {
-            var ref:StorageReference = storageRef.child("*image/" + UUID.randomUUID().toString())
-            image.forEach{
-                if(it is ImageEntity.Image)
-                {
-                    if(it.imageUri != null){
-                        ref.putFile(it.imageUri!!)
-                    }
-                }
-            }
             viewModel.createBoots(
+                images = image
+                    .filter { it is ImageEntity.Image && it.imageUri != null }
+                    .map { (it as ImageEntity.Image).imageUri!! },
                 BootsModel(
                     description = binding.etDescription.text.toString(),
                     material = binding.spinnerMaterial.selectedItem.toString(),
