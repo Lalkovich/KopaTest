@@ -8,6 +8,8 @@ import com.milanlalkovich.kopatest.R
 import com.milanlalkovich.kopatest.core.extensions.nonNullObserve
 import com.milanlalkovich.kopatest.core.fragment.BaseVMFragment
 import com.milanlalkovich.kopatest.databinding.FragmentAboutBinding
+import com.milanlalkovich.kopatest.domain.entity.ImageEntity
+import com.milanlalkovich.kopatest.view.bottom_navigation.add_post.ImageAdapter
 import timber.log.Timber
 import kotlin.reflect.KClass
 
@@ -46,11 +48,7 @@ class AboutFragment : BaseVMFragment<AboutViewModel, FragmentAboutBinding>() {
             binding.width.text = it.width.toString()
             binding.description.text = it.description
 
-            Glide.with(this)
-                .load(it.images[0])
-                .into(binding.ivAbout)
-                Timber.d(it.toString())
-            binding.item = it
+            binding.ivAbout.adapter = ViewPagerAdapter(it.images, this)
         }
     }
 }

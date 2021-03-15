@@ -220,9 +220,15 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                         if (task.isSuccessful) {
                             it.onSuccess(task.result.toString())
                         }
+                        else{
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
                     }
                 }
-            }.toList()
+            }
+            .toList()
     }
 
 }
