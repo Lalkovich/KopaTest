@@ -46,15 +46,22 @@
     </string-array>
 
     <string-array name="size_array">
+        <item>20.5</item>
+        <item>21</item>
+        <item>21.5</item>
+        <item>22</item>
         <item>22.5</item>
         <item>23</item>
         <item>23.5</item>
     </string-array>
 
     <string-array name="length">
+        <item>34</item>
         <item>35</item>
         <item>36</item>
         <item>37</item>
+        <item>38</item>
+        <item>39</item>
     </string-array>
 
     <string-array name="width_array">

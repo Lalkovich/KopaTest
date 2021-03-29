@@ -54,7 +54,6 @@ class AddPostFragment : BaseVMFragment<AddPostViewModel, FragmentAddPostBinding>
         val storage: FirebaseStorage =
             FirebaseStorage.getInstance("gs://kopatest-f6e8d.appspot.com")
         val storageRef = storage.reference
-        var imagesRef: StorageReference? = storageRef.child("images/")
 
         binding.selectImage.layoutManager = GridLayoutManager(requireContext(), 4)
         binding.selectImage.adapter = adapter
@@ -72,11 +71,11 @@ class AddPostFragment : BaseVMFragment<AddPostViewModel, FragmentAddPostBinding>
                 BootsModel(
                     description = binding.etDescription.text.toString(),
                     material = binding.spinnerMaterial.selectedItem.toString(),
-                    price = binding.etPrice.text.toString().toInt(),
+                    price = binding.etPrice.text.toString().toDouble(),
                     title = binding.etModel.text.toString(),
-                    length = binding.spinnerSize.selectedItem.toString().toInt(),
-                    width = binding.spinnerWidth.selectedItem.toString().toInt(),
-                    bootsLength = binding.spinnerLength.selectedItem.toString().toInt(),
+                    length = binding.spinnerSize.selectedItem.toString().toDouble(),
+                    width = binding.spinnerWidth.selectedItem.toString().toDouble(),
+                    bootsLength = binding.spinnerLength.selectedItem.toString().toDouble(),
                     isArchived = false,
                     userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
                 )

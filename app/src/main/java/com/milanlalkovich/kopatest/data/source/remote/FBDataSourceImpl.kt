@@ -11,6 +11,7 @@ import com.milanlalkovich.kopatest.domain.model.response.UserModel
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import java.util.*
 
@@ -80,10 +81,10 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             id = document.id,
                             images = document["images"] as? List<String> ?: listOf(),
                             title = document["title"].toString(),
-                            width = document["width"].toString().toInt(),
-                            length = document["length"].toString().toInt(),
-                            price = document["price"].toString().toInt(),
-                            bootsLength = document["bootsLength"].toString().toInt(),
+                            width = document["width"].toString().toDouble(),
+                            length = document["length"].toString().toDouble(),
+                            price = document["price"].toString().toDouble(),
+                            bootsLength = document["bootsLength"].toString().toDouble(),
                             material = document["material"].toString(),
                             isArchived = document["archived"].toString().toBoolean(),
                             userUid = document["userUid"].toString()
@@ -106,9 +107,10 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                     id = result.id,
                     images = result["images"] as? List<String> ?: listOf(),
                     title = result["title"].toString(),
-                    width = result["width"].toString().toInt(),
-                    price = result["price"].toString().toInt(),
-                    bootsLength = result["bootsLength"].toString().toInt(),
+                    width = result["width"].toString().toDouble(),
+                    price = result["price"].toString().toDouble(),
+                    length = result["length"].toString().toDouble(),
+                    bootsLength = result["bootsLength"].toString().toDouble(),
                     material = result["material"].toString(),
                     description = result["description"].toString(),
                     isArchived = result["archived"].toString().toBoolean(),
@@ -147,10 +149,10 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             id = document.id,
                             images = document["images"] as? List<String> ?: listOf(),
                             title = document["title"].toString(),
-                            width = document["width"].toString().toInt(),
-                            length = document["length"].toString().toInt(),
-                            price = document["price"].toString().toInt(),
-                            bootsLength = document["bootsLength"].toString().toInt(),
+                            width = document["width"].toString().toDouble(),
+                            length = document["length"].toString().toDouble(),
+                            price = document["price"].toString().toDouble(),
+                            bootsLength = document["bootsLength"].toString().toDouble(),
                             material = document["material"].toString(),
                             isArchived = document["archived"].toString().toBoolean(),
                             userUid = document["userUid"].toString()
@@ -180,10 +182,10 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
                             id = document.id,
                             images = document["images"] as? List<String> ?: listOf(),
                             title = document["title"].toString(),
-                            width = document["width"].toString().toInt(),
-                            length = document["length"].toString().toInt(),
-                            price = document["price"].toString().toInt(),
-                            bootsLength = document["bootsLength"].toString().toInt(),
+                            width = document["width"].toString().toDouble(),
+                            length = document["length"].toString().toDouble(),
+                            price = document["price"].toString().toDouble(),
+                            bootsLength = document["bootsLength"].toString().toDouble(),
                             material = document["material"].toString(),
                             isArchived = document["archived"].toString().toBoolean(),
                             userUid = document["userUid"].toString()
@@ -202,31 +204,34 @@ class FBDataSourceImpl(retrofit: Retrofit) : FBDataSource {
     override fun uploadImages(images: List<Uri>): Single<List<String>> {
         val storage: FirebaseStorage =
             FirebaseStorage.getInstance("gs://kopatest-f6e8d.appspot.com")
-        val storageRef = storage.reference
-        val ref: StorageReference = storageRef.child("*image/" + UUID.randomUUID().toString())
+        val basePath = "image"
+        val userFolder = FirebaseAuth.getInstance().currentUser?.uid!!
 
         return Observable.fromIterable(images)
             .flatMapSingle { uri ->
                 Single.create<String> {
-                    val uploadTask = ref.putFile(uri)
-                    uploadTask.continueWithTask { task ->
-                        if (!task.isSuccessful) {
-                            task.exception?.let {
+                    val imageName = UUID.randomUUID().toString()
+                    val newImageReference: StorageReference = storage.reference.child(
+                        "$basePath/$userFolder/$imageName"
+                    )
+                    val uploadTask = newImageReference.putFile(uri)
+                    uploadTask.continueWithTask {
+                        if (!uploadTask.isSuccessful) {
+                            uploadTask.exception?.let {
                                 throw it
                             }
                         }
-                        ref.downloadUrl
+                        newImageReference.downloadUrl
                     }.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             it.onSuccess(task.result.toString())
-                        }
-                        else{
+                        } else {
                             task.exception?.let {
                                 throw it
                             }
                         }
                     }
-                }
+                }.subscribeOn(Schedulers.io())
             }
             .toList()
     }

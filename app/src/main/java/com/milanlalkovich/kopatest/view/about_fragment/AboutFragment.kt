@@ -43,6 +43,7 @@ class AboutFragment : BaseVMFragment<AboutViewModel, FragmentAboutBinding>() {
         viewModel.boots.nonNullObserve(viewLifecycleOwner) {
             binding.title.text = it.title
             binding.bootsLength.text = it.bootsLength.toString()
+            binding.length.text = it.length.toString()
             binding.materialTitle.text = it.material
             binding.price.text = it.price.toString()
             binding.width.text = it.width.toString()
